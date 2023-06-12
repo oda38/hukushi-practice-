@@ -1,0 +1,76 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-md-3">
+      <h4 class="m-5">会員情報編集</h4>
+    </div>
+  </div>
+  
+  <%= form_with model:@user, local:true do |f| %>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label>プロフィール画像</label>
+    </div>
+    <div class="col-sm-4">
+      <%= f.file_field :profile_image, accept: "image/*" %>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label>氏名</label>
+    </div>
+    <div class="col-sm-4">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label>カナ</label>
+    </div>
+    <div class="col-sm-4">
+      <%= f.text_field :name_kana %>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label>ニックネーム</label>
+    </div>
+    <div class="col-sm-4">
+      <%= f.text_field :nickname %>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label>電話番号</label>
+    </div>
+    <div class="col-sm-4">
+      <%= f.text_field :telephone_number %>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label>メールアドレス</label>
+    </div>
+    <div class="col-sm-4">
+      <%= f.email_field :email %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-2 m-3">
+      <%= f.submit "編集内容を保存", class: 'btn btn-sm btn-block btn-success' %>
+    </div>
+    <div class="col-sm-2 m-3">
+        <%= link_to "退会する", unsubscribe_path(@user), class: "btn btn-sm btn-block btn-danger" %>
+    </div>
+  </div>
+    
+  <% end %>
+   
+  </div>
+</div>

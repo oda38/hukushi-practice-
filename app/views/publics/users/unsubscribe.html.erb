@@ -1,0 +1,23 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+
+        <div class="row justify-content-center">
+          <h4 class="m-5">
+            <strong>退会手続き</strong>
+          </h4>
+          <p class="text-center mb-5">
+          退会すると、これまでの投稿が閲覧できなくなります。</br>
+          再度ご利用をいただく場合には、新規登録のお手続きが必要になります。</br>
+          本当に退会してよろしいですか？</br>
+          退会する場合は、「退会する」をクリックしてください。</p>
+        </div>
+        <div class="row justify-content-center mb-5">
+          <p><%= link_to '退会しない', user_path(current_user), class: "btn btn-sm btn-primary" %>&emsp;</p>
+          <p><%= button_to '退会する', withdrawal_path, method: :patch, class: "btn btn-sm btn-danger" %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

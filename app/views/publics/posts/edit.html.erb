@@ -1,0 +1,37 @@
+      
+      
+      <%= form_with model:@post do |f| %>
+    　   <table class="table table-borderless mt-3">
+    　    <tr>
+           <td><%= f.label :画像 %></td>
+           <td><%= f.file_field :image, accept: "image/*" %></td>
+         </tr>
+       　 <tr>
+           <td><%= f.label :タイトル %></td>
+           <td><%= f.text_field :title %></td>
+         </tr>
+         <tr>
+           <td><%= f.label :投稿内容 %></td>
+           <td><%= f.text_area :content %></td>
+         </tr>
+         <tr>
+           <td><%= f.label"タグ (#で区切ると複数タグ登録できます)" %></td>
+           <td><%= f.text_field :name,value: @tag_list,class:"form-control"%></td>
+         </tr>
+        </table>
+        
+        
+    <div class="row mt-4">
+      <div class="form-inline mx-auto">
+        <% if @post.is_draft == true %>
+          <%= f.submit "下書きを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
+          <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+        <% else %>
+          <%= f.submit "投稿を更新", :name => 'update_post', class:'btn btn-sm btn-warning text-light' %>
+        <% end %>
+      </div>
+    </div>
+    
+  <% end %>
+  
+ 

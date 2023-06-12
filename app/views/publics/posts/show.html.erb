@@ -1,0 +1,39 @@
+<div class='container'>
+ 
+  <div class="row mt-5">
+    <div class="col-lg-4">
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, size: "50x50" %>
+      <% else %>
+        <%= image_tag 'no_image_irasutoya', size: "50x50" %>
+      <% end %>
+      
+      <%= @user.nickname %>
+    </div>
+  
+    <div class="col-lg-2 offset-lg-6" >
+      <% if @post.user == current_user %>
+        <% if @post.is_draft == true %>
+          <%= link_to "この下書きを編集する", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
+        <% else %>
+          <%= link_to "この投稿を編集する", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div> 
+
+  <div class="row mt-5">
+    <div class="col-lg-4" > 
+      <%= image_tag @post.image, size: "300x300" %>
+    </div>
+  
+    <div class="col-lg-4" >     
+      <h4>【<%= @post.title %>】</h4>
+      <p><%= @post.content %></p>
+        <%= @post.tags.map(&:name).join('# ') %>
+    </div>
+  </div> 
+  
+ 
+  
+</div>

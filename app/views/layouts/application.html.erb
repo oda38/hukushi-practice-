@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hukucity</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  
+  
+  <header>
+    <nav class = "navbar navbar-expand-lg navbar-light  border-black border-bottom p-4">
+      <div class = "container">
+        <a class = "navbar-brand" href = "/">
+          <h2>ふくシティ</h2>
+        </a>
+        <div class ="d-flex flex-column">
+          <ul class = "navbar-nav ml-auto">
+            <%= render "layouts/header" %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+  
+  <body>
+    <%= yield %>
+  </body>
+</html>
