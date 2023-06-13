@@ -13,10 +13,16 @@
 
 
 
-
     <% if user_signed_in? %>
       <%= link_to "投稿する", new_post_path, class: "btn btn-primary" %>
     <% else %>
+      
+    
+     <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+
       <p>投稿、コメント、いいねなどを楽しむためには、<%= link_to "会員登録", new_user_registration_path, class: "btn btn-primary" %>が必要です。</p>
       <p>会員の方は<%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %></p>
     <% end %>
+    
+    
+    

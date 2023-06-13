@@ -6,10 +6,6 @@ class GutentagCacheCounter < ActiveRecord::Migration[4.2]
     add_column :gutentag_tags, :taggings_count, :integer, :default => 0
     add_index  :gutentag_tags, :taggings_count
 
-    Gutentag::Tag.reset_column_information
-    Gutentag::Tag.pluck(:id).each do |tag_id|
-      Gutentag::Tag.reset_counters tag_id, :taggings
-    end
   end
 
   def down

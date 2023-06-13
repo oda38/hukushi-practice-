@@ -1,21 +1,16 @@
 
- <table class="table table-borderless mt-3">
+ <table class="table mt-3">
     
     <% posts.each do |post| %>
-      <tbody>
-        <tr>
-          <td><%= image_tag post.image, size: "100x100", class: 'card-img-top' %></td>
-          <td>【<%= post.title.truncate(10) %>】</td>
-          <td><%= post.tags.map(&:name).join('# ') %></td>
-          <td><% if post.is_draft == true %>
-                <%= link_to "この下書きを見る", post_path(post.id), class: "btn btn-sm btn-success" %>
-              <% else %>
-                <%= link_to "この投稿を見る", post_path(post.id), class: "btn btn-sm btn-success" %>
-               <% end %>
-          </td>
-        </tr>
-      </tbody>
-    
+      <tr>
+        <td>
+          <%= link_to post_path(post.id), class: "text-dark text-decoration-none" do %>
+            <%= image_tag post.image, size: "100x100" %>
+            【<%= post.title.truncate(10) %>】
+          <% end %>
+        </td>
+        <td><%= post.tags.map(&:name).join('# ') %></td>
+      </tr>
     <% end %>
  </table>
  

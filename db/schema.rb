@@ -81,7 +81,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_043702) do
     t.string "name", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "taggings_count", default: 0, null: false
     t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
+    t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
   end
 
   create_table "post_images", force: :cascade do |t|

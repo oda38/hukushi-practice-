@@ -5,7 +5,7 @@ class Publics::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @posts = current_user.posts.where(is_draft: :false)
+    @posts = current_user.posts.where(is_draft: :false).page(params[:page])
   end
 
   def edit
@@ -45,7 +45,7 @@ class Publics::UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:profile_image, :name, :name_kana, :nickname, :telephone_number, :email)
+    params.require(:user).permit(:profile_image, :name, :name_kana, :nickname, :telephone_number, :email,)
   end
   
 end

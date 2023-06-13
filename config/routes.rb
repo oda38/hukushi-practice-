@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
  
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+ 
+ 
+ 
 #ユーザー側
   devise_for :users, skip: [:passwords], controllers: {
     sessions:      'publics/sessions',
@@ -20,7 +26,7 @@ Rails.application.routes.draw do
       end
     end
     
-    resources :posts, only:[:new, :create, :index, :show, :edit, :update]
+    resources :posts, only:[:new, :create, :index, :show, :edit, :update, :destroy]
   end
   
   

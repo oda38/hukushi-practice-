@@ -23,6 +23,7 @@
         
     <div class="row mt-4">
       <div class="form-inline mx-auto">
+         <%= button_to "削除", user_posts_path(current_user), method: :delete, "data-confirm" => "本当に削除しますか？" %>
         <% if @post.is_draft == true %>
           <%= f.submit "下書きを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
           <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
