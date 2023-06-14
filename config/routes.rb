@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
- 
+
+#ゲストログイン 
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
- 
  
  
 #ユーザー側
@@ -20,13 +20,18 @@ Rails.application.routes.draw do
   root to: 'publics/homes#top'
   scope module: :publics do
     resources :users, only:[:index, :show, :edit, :update] do
-      resources :posts, only:[:index, :show, :edit]
+      resources :posts, only:[:index]
       member do
         get :confirm
+        get :favorites
       end
     end
     
-    resources :posts, only:[:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :posts, only:[:new, :create, :index, :show, :edit, :update, :destroy]do
+       resources :comments, only: [:create]
+       resource :favorites, only: [:create, :destroy]
+    end
+    get "search_tag"=>"posts#search_tag"
   end
   
   
@@ -38,7 +43,9 @@ Rails.application.routes.draw do
   }
   
   namespace :admins do
-    resources :users, only:[:index, :show, :create, :edit, :update]
+    patch "withdrawal/:id" => "users#withdrawal", as: "withdrawal"
+    
+    resources :users, only:[:index, :show]
     resources :announcements, only:[:index, :new, :create, :show, :edit, :update]
   end
   

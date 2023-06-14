@@ -10,6 +10,7 @@
       
       <%= @user.nickname %>
     </div>
+    
     <div class="col-lg-2 offset-lg-6" >
       <% if @post.user == current_user %>
         <% if @post.is_draft == true %>
@@ -24,12 +25,50 @@
   <div class="row mt-5">
     <div class="col-lg-4" > 
       <%= image_tag @post.image, size: "300x300" %>
+      
+       
+     <% if @post.favorited_by?(current_user) %>
+    <p>
+      <%= link_to post_favorites_path(@post), data: { "turbo-method": :delete } do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorites_path(@post), data: { "turbo-method": :post } do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+    
     </div>
+    
   
     <div class="col-lg-4" >     
       <h4>【<%= @post.title %>】</h4>
       <p><%= @post.content %></p>
-        <%= @post.tags.map(&:name).join('# ') %>
+        <%= @post.tags.map(&:name).join(',') %>
+    </div>
+  </div> 
+  
+  <div class="row mt-5">
+    <div class="col-lg-4 offset-lg-4">
+      <% @post.comments.each do |comment| %>
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image, size: "50x50" %>
+        <% else %>
+          <%= image_tag 'no_image_irasutoya', size: "50x50" %>
+        <% end %>
+       <%= comment.user.name %>
+       <%= comment.created_at.strftime('%Y/%m/%d') %>
+       <%= comment.comment %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with model: [@post, @comment] do |f| %>
+        <%= f.text_area :comment, :size=>"30", placeholder: "この投稿にコメントする" %>
+        <%= f.submit "送信する" %>
+      <% end %>
     </div>
   </div> 
   

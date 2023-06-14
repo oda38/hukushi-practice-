@@ -1,0 +1,9 @@
+   <h5>タグ検索</h5>
+    
+  
+    <% tag_list.each do |list|%>
+        <%= link_to list.name, search_tag_path(tag_id: list.id), class: "text-decoration-none" %>
+        <%="(#{list.posts.count})" %>
+    <% end %>
+ 
+     

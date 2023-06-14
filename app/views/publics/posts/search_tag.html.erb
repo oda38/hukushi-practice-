@@ -1,0 +1,13 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3 mt-5">  
+     <%= render 'tag_list', tag_list: @tag_list %>
+    </div>  
+    <div class="col-md-8 offset-md-1 mt-5">
+    <h5><%=@tag.name%>の検索結果</h5>
+     <%= render 'index', posts: @posts %>
+    </div>  
+  </div>
+
+</div>

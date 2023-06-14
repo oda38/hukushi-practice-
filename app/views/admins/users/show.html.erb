@@ -1,2 +1,56 @@
-<h1>Admins::Users#show</h1>
-<p>Find me in app/views/admins/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4 class="m-5 col-md-6"><%= @user.name %>さんの会員情報</h4>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+
+  <table class='table table-hover table-inverse'>
+    <tbody>
+      <tr>
+        <td>会員ID</td>
+        <td><%= @user.id %></td>
+      </tr>
+      <tr>
+        <td>氏名</td>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <td>フリガナ</td>
+        <td><%= @user.name_kana %></td>
+      </tr>
+      <tr>
+        <td>ニックネーム</td>
+        <td><%= @user.nickname %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= @user.telephone_number %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>会員ステータス</td>
+        <td>
+          <% if @user.is_deleted == true %>
+          <p class="text-secondary">退会</p>
+          <% else %>
+          <p class="text-success">有効</p>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ 
+  <div class="row my-3 mx-3">
+    <% if @user.is_deleted %>
+      <%= link_to "このユーザーを有効にする", admin_withdrawal_path(@user.id), data: { "turbo-method": :patch }, class: "btn btn-success" %>
+    <% else %>
+      <%= link_to 'このユーザーを退会させる', admins_withdrawal_path(@user.id), data: { "turbo-method": :patch }, class: "btn btn-sm btn-block btn-danger"%>
+    <% end %>
+  </div>
+</div>

@@ -1,22 +1,14 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-md-3 mt-5">
+      <%= render 'tag_list', tag_list: @tag_list %>
+    </div> 
     
-    <div class="col-md-2 mt-5">   
-      <h5>タグ一覧</h5>
-    
-    <% @tag_list.each do |list|%>
-　　<%=list.name %>
-　　<% end %>
-     
-    </div>   
-    
-    <div class="col-md-9 offset-md-1 mt-5">   
-      <h5>投稿一覧</h5>
-
-      <%= render 'index', posts: @posts %>
-      
-      <%= paginate @posts %>
+    <div class="col-md-8 offset-md-1 mt-5">
+      <h5>みんなの投稿一覧</h5>
+        <%= render 'index', posts: @posts %>
+        <%= paginate @posts %>
     </div>  
       
   </div>

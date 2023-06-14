@@ -1,12 +1,13 @@
 class Post < ApplicationRecord
 
-
   has_one_attached :image
   
   belongs_to :user
  
-  has_many :tag_maps,dependent: :destroy
-  has_many :tags,through: :tag_maps
+  has_many :tag_maps, dependent: :destroy
+  has_many :tags, through: :tag_maps
+  has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   def save_tag(sent_tags)
   # タグが存在していれば、タグの名前を配列として全て取得
@@ -18,7 +19,7 @@ class Post < ApplicationRecord
 
     # 古いタグを消す
     old_tags.each do |old|
-      self.tags.delete　Tag.find_by(name: old)
+      self.tags.delete Tag.find_by(name: old)
     end
 
     # 新しいタグを保存
@@ -27,4 +28,11 @@ class Post < ApplicationRecord
       self.tags << new_post_tag
    end
   end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+  
+  
+  
 end

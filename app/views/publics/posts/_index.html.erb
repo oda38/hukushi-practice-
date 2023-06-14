@@ -1,5 +1,5 @@
 
- <table class="table mt-3">
+  <table>
     
     <% posts.each do |post| %>
       <tr>
@@ -9,9 +9,9 @@
             【<%= post.title.truncate(10) %>】
           <% end %>
         </td>
-        <td><%= post.tags.map(&:name).join('# ') %></td>
+        <td><%= post.tags.map(&:name).join(',') %></td>
       </tr>
     <% end %>
- </table>
+  </table>
  
 
