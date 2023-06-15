@@ -1,5 +1,11 @@
   <% if admin_signed_in? %>
     <li>
+      <%= link_to "お知らせを掲示する", new_admins_announcement_path %>
+    </li>
+    <li>
+      <%= link_to "投稿・コメント管理", admins_posts_path %>
+    </li>
+    <li>
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     </li>
   

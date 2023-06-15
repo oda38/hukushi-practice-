@@ -1,0 +1,15 @@
+ <table>
+    
+    <% @posts.each do |post| %>
+      <tr>
+        <td>
+          <%= link_to admins_post_path(post.id), class: "text-dark text-decoration-none" do %>
+            <%= image_tag post.image, size: "100x100" %>
+            【<%= post.title.truncate(10) %>】
+          <% end %>
+        </td>
+        <td><%= post.tags.map(&:name).join(',') %></td>
+      </tr>
+    <% end %>
+  </table>
+ 

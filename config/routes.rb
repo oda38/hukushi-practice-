@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 #ゲストログイン 
-  devise_scope :user do
+  devise_scope :users do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
  
@@ -47,6 +47,9 @@ Rails.application.routes.draw do
     
     resources :users, only:[:index, :show]
     resources :announcements, only:[:index, :new, :create, :show, :edit, :update]
+    resources :posts, only:[:index, :show, :destroy]do
+      resources :comments, only: [:destroy]
+    end
   end
   
   
