@@ -1,32 +1,54 @@
-  <% if admin_signed_in? %>
-    <li>
-      <%= link_to "お知らせを掲示する", new_admins_announcement_path %>
+ <% if admin_signed_in? %>
+    <li class="nav-item mx-2">
+      <%= link_to "お知らせの掲示／一覧", admins_announcements_path %>
     </li>
-    <li>
-      <%= link_to "投稿・コメント管理", admins_posts_path %>
+    <li class="nav-item mx-2">
+      <%= link_to "ユーザーの投稿管理", admins_posts_path %>
     </li>
-    <li>
+    <li class="nav-item mx-2">
+      <%= link_to "ユーザー一覧", admins_users_path %>
+    </li>
+    <li class="nav-item mx-2">
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     </li>
-  
+    
   <% elsif user_signed_in? %>
-    <li>
-      <%= link_to 'みんなの投稿をみる', posts_path %>
+  <div class="d-flex flex-column mb-3">
+   <div class="d-flex flex-row-reverse p-2">
+    <li class="nav-item mx-2">
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     </li>
-    <li>
-      <%= link_to 'ユーザー一覧', users_path %>
-    </li>
-    <li>
+    <li class="nav-item mx-2">
       <%= link_to 'マイページ', user_path(current_user.id) %>
     </li>
-    <li>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :get %>
+    <li class="nav-item mx-2">
+      <%= link_to 'ユーザー一覧', users_path %>
     </li>
+    <li class="nav-item mx-2">
+      <%= link_to 'みんなの投稿をみる', posts_path %>
+    </li>
+    <li class="nav-item mx-2">
+      <%= link_to 'アイデアを投稿する', new_post_path %>
+    </li>
+   </div>
+   <div class="text-right p-2"> 
+     <%= form_with url: search_path, local: true, method: :get, class: "rootpageSearchForm" do |f| %>
+      <%= f.text_field :keyword, placeholder: "キーワードを入力", class: "rootpageSearchForm__content" %>
+      <%= f.select :range, options_for_select([['ユーザー名'], ['投稿タイトル']]) %>
+      <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+      <%= f.submit "検索", class: "rootpageSearchForm__bottum" %>
+     <% end %>
+   </div>
+  </div> 
+  
   <% else %>
-    <li>
+    <li class="nav-item mx-2">
+      <%= link_to '投稿一覧をみる', posts_path %>
+    </li>
+    <li class="nav-item mx-2">
       <%= link_to "新規登録", new_user_registration_path %>
     </li>
-    <li>
-      <%= link_to "ログイン", new_user_session_path %>
+    <li class="nav-item mx-2">
+      <%= link_to "ユーザーログイン", new_user_session_path %>
     </li>
-  <% end %>
+<% end %>

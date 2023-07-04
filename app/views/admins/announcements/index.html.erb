@@ -1,2 +1,64 @@
-<h1>Admins::Announcements#index</h1>
-<p>Find me in app/views/admins/announcements/index.html.erb</p>
+<div class="notice"><%= flash[:notice] %></div>
+
+
+<div class="container"> 
+  <div class="row"> 
+
+    <div class="col-md-4 mt-5">
+      <h4>お知らせを掲示する</h4>
+      
+      <%= form_with model: @announcement, url: admins_announcements_path do |f| %>
+    　   <div class="form-group">
+          <label class="text-secondary">タイトル</label><br>
+          <%= f.text_field :title, :size=>"20" %>
+          <font color="red"><%= render "layouts/error_messages", model: @announcement, attribute: :title %></font>
+        </div>
+        
+    　   <div class="form-group">
+          <label class="text-secondary">画像</label><br>
+          <%= f.file_field :announcement_image, accept: "image/*" %>
+          <font color="red"><%= render "layouts/error_messages", model: @announcement, attribute: :announcement_image %></font>
+        </div>
+    　 
+        <div class="form-group">
+          <label class="text-secondary">お知らせ内容</label><br>
+          <%= f.text_area :content, class: 'form-control',size: "20x10" %>
+          <font color="red"><%= render "layouts/error_messages", model: @announcement, attribute: :content %></font>
+        </div>
+          
+          <div class="row float-end">
+          <div class="m-5">
+            <%= f.submit 'お知らせを公開', class: 'mr-5 btn btn-sm btn-warning text-white' %>
+          </div>
+        </div>
+     <% end %>
+    </div>
+    
+    <div class="col-md-7 offset-md-1 mt-5">
+      <h4>公開したお知らせ一覧</h4>
+        <table class="table table-light table-bordered table-hover mt-3">
+          <thead class="table-secondary">
+           <tr>
+            <th scope="col" style="width: 10%"></th>
+            <th scope="col" style="width: 30%">タイトル</th>
+            <th scope="col" style="width: 60%">内容</th>
+           </tr>
+          </thead>
+     
+         <% @announcements.each do |announcement| %>
+          <tbody>
+            <td><%= link_to admins_announcement_path(announcement.id) do %>
+                 <%= image_tag announcement.announcement_image, size: "80x80" %> <% end %>
+                   <%= announcement.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to admins_announcement_path(announcement.id), class: "text-dark text-decoration-none" do %>
+                   <%= announcement.title.truncate(15) %><% end %></td>
+            <td><%= announcement.content.truncate(50) %></td>
+          </tbody>
+         <% end %>
+        </table>
+        <%= paginate @announcements %>
+    </div>
+    
+  </div>
+</div>
+ 

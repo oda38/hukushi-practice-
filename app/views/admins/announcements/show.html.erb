@@ -1,2 +1,25 @@
-<h1>Admins::Announcements#show</h1>
-<p>Find me in app/views/admins/announcements/show.html.erb</p>
+<div class='container'>
+ 
+  <div class="row mt-5">
+    <h5>公開日：<%= @announcement.created_at.strftime('%Y/%m/%d') %></h5>
+  </div>
+  
+  <div class="row mt-2">  
+    <div class="col-lg-4">
+        <%= image_tag @announcement.announcement_image, size: "350x350" %>
+    </div>  
+    <div class="col-lg-7 offset-lg-1">  
+      <p>【タイトル】</br><%= @announcement.title %></p>
+      <p>【内容】</br><%= h(@announcement.content).gsub(/\n|\r|\r\n/, "<br>").html_safe %></p>
+    </div>
+  </div>
+  
+  <div class="row"> 
+    <div class="col-lg-4 mt-4 mb-4">
+        <%= link_to "編集する", edit_admins_announcement_path(@announcement.id), class: "btn btn-sm btn-block btn-success" %>
+    </div>
+  </div>
+  
+</div>
+  
+  

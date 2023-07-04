@@ -48,7 +48,7 @@
  
   <div class="row my-3 mx-3">
     <% if @user.is_deleted %>
-      <%= link_to "このユーザーを有効にする", admin_withdrawal_path(@user.id), data: { "turbo-method": :patch }, class: "btn btn-success" %>
+      <%= link_to "このユーザーを有効にする", admins_withdrawal_path(@user.id), data: { "turbo-method": :patch }, class: "btn btn-success" %>
     <% else %>
       <%= link_to 'このユーザーを退会させる', admins_withdrawal_path(@user.id), data: { "turbo-method": :patch }, class: "btn btn-sm btn-block btn-danger"%>
     <% end %>
