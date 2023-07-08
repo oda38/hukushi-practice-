@@ -1,28 +1,57 @@
+<div class="notice"><%= flash[:notice] %></div>
 
-
-    <h1>ようこそ！　福祉のまち「ふくシティ」へ！</h1>
-      <p>ふくシティで、皆さんの作ったものやアイデアを共有しませんか？</p>
+<div class='container'>
+  <div class="row">
+     
+    <div class="col-md-6 mt-5">
+      <h1>ようこそ！</br>ふくシティへ&nbsp;<i class="fas fa-seedling"></i></h1>
       
+      <div class="mt-5">
+        <p>ふくシティで、皆さんの作ったものやアイデアを共有しませんか？</p>
+        <p>「デイサービスのレクリエーションが毎回同じものになってしまう…」</p>
+        <p>「今月の保育園の壁面飾り何にしよう…忙しくて作る時間がない…」</p>
+        <p>「子どものために市販のおもちゃをアレンジしたい！」</p>
+        <p>あなたのアイデアが、誰かの助けになります！アイデアを共有して、福祉の輪を広げましょう♪</p>
+        <p>みんなで作ろう　福祉のまち！ふくシティ&nbsp;<i class="fas fa-dove"></i></p>
+      </div>
 
-      <p>「デイサービスのレクリエーションが毎回同じものになってしまう…」</p>
-      <p>「今月の保育園の壁面飾り何にしよう…忙しくて作る時間がない…」</p>
-      <p>「子どものために市販のおもちゃをアレンジしたい！」</p>
-
-      <p>そんな思いを持った福祉人たちで集まり、アイデアを共有することで、助け合いの輪を広げましょう♪</p>
-      <p>みんなで作ろう　福祉のまち！ふくシティ</p>
-
-
-
-    <% if user_signed_in? %>
-      <%= link_to "投稿する", new_post_path, class: "btn btn-primary" %>
-    <% else %>
+      <div class="p-5">
+        <% if user_signed_in? %>
+            <%= link_to "アイデアを投稿する", new_post_path, class: "btn btn-sm btn-block btn-warning text-white" %>
+        <% else %>
+            <%= link_to "新規会員登録", new_user_registration_path, class: "btn btn-sm btn-block btn-primary" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-sm btn-block btn-success" %>
+        <% end %>
+      </div>
+    </div> 
+    
+    <div class="col-md-5 offset-1 mt-5">
+      <table class="table table-bordered table-striped table-light table-hover">
+        <thead>
+          <th class="text-center">運営からのお知らせ【<%= link_to "詳細はこちら" %>】</th>
+          
+        </thead>
+        <tbody>
+         <% @announcements.each do |announcement| %>
+          <tr>
+           <td class="text-center">
+             <%= image_tag announcement.announcement_image, size: "100x100" %>
+             <div class="d-flex flex-column">
+              <div>
+                【<%= announcement.title.truncate(25) %>】
+              </div>
+              <div>
+                <%= announcement.content.truncate(15) %>
+              </div>
+             </div>
+           </td>
+          </tr>
+         <% end %>
+        </tbody>
+      </table>
       
-    
-     <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, data: { "turbo-method": :post } %>
-
-      <p>投稿、コメント、いいねなどを楽しむためには、<%= link_to "会員登録", new_user_registration_path, class: "btn btn-primary" %>が必要です。</p>
-      <p>会員の方は<%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %></p>
-    <% end %>
-    
+    </div> 
+  </div>  
+</div>
     
     

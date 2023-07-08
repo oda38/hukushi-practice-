@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/86b1bf15ce.js" crossorigin="anonymous"></script>
   </head>
   
-  
+<body>
   <header>
     <nav class = "navbar navbar-expand-lg navbar-light  border-black border-bottom p-4">
       <div class = "container">
-        <a class = "navbar-brand" href = "/">
-          <h2>ふくシティ</h2>
-        </a>
-        <div class ="d-flex flex-column">
+          <%= link_to root_path, class: "navbar-brand" do %>
+            <%= image_tag "logo.png", style: "width: 150px; height: 150px;"%>
+          <% end %>
+          
+          <% if user_signed_in? %>
+              ようこそ、<%= current_user.nickname %>さん！
+          <% end %>
+          
           <ul class = "navbar-nav ml-auto">
             <%= render "layouts/header" %>
           </ul>
@@ -25,9 +33,11 @@
       </div>
     </nav>
   </header>
-  
-  
-  <body style="background-color:#FFFFEE;">
+   <main>
     <%= yield %>
-  </body>
+  </main>
+  <footer class="border-top pt-5"></footer>
+ </body>
 </html>
+
+ 
