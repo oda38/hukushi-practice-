@@ -7,6 +7,10 @@ class User < ApplicationRecord
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
+      user.name = 'ゲスト'
+      user.name_kana = 'ゲスト' 
+      user.nickname = 'ゲスト'
+      user.telephone_number = '00000000001' 
     end
   end
   
@@ -14,6 +18,12 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
+  
+  validates :name, presence: true
+  validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー]+\z/u }
+  validates :nickname, presence: true
+  validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
+  
   
 
   has_many :posts, dependent: :destroy
@@ -29,5 +39,17 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  
+  def self.looks(search, keyword)
+    if search == "perfect_match"
+      @user = User.where("nickname LIKE?", "#{keyword}")
+    elsif search == "partial_match"
+      @user = User.where("nickname LIKE?","%#{keyword}%")
+    else
+      @user = User.all
+    end
+  end
+  
 
 end

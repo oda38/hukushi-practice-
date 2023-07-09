@@ -1,14 +1,26 @@
 class Post < ApplicationRecord
-
-  has_one_attached :image
-  has_one_attached :profile_image
   
-  def get_profile_image
-    unless profile_image.attached?
+  validates :title, presence: true, on: :publicize
+  validates :content, presence: true, on: :publicize
+  
+  
+  has_one_attached :image
+  has_many_attached :addition_images
+  
+  def get_image
+    unless image.attached?
       file_path = Rails.root.join('hukucity/app/assets/images/no_image_irasutoya.jpg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed
+    image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  validates :image, presence: true, on: :publicize
+  validate :validate_number_of_files
+  
+  def validate_number_of_files
+    return if addition_images.length <= 4
+    errors.add(:addition_images, "に入力できる画像は4つまでです。")
   end
   
   
@@ -43,6 +55,15 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  def self.looks(search, keyword)
+    if search == "perfect_match"
+      @post = Post.where("title LIKE?", "#{keyword}")
+    elsif search == "partial_match"
+      @post = Post.where("title LIKE?","%#{keyword}%")
+    else
+      @post = Post.all
+    end
+  end
   
   
 end

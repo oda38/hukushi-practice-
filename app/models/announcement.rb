@@ -1,4 +1,5 @@
 class Announcement < ApplicationRecord
+  
   has_one_attached :announcement_image
   
   validates :title, presence: true

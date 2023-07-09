@@ -31,6 +31,8 @@ Rails.application.routes.draw do
        resources :comments, only: [:create]
        resource :favorites, only: [:create, :destroy]
     end
+    
+    post "search" => "searches#search"
     get "search_tag"=>"posts#search_tag"
   end
   

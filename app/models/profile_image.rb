@@ -1,5 +1,2 @@
 class PoImage < ApplicationRecord
-  
-
-  
 end
