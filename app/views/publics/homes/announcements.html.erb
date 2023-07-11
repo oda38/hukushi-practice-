@@ -1,0 +1,33 @@
+<div class='container'>
+
+  <div class="row mt-5">
+    <h5>運営からのお知らせ</h5>
+  </div>
+    
+  <div class="row">
+    <div class="col-md-10 mx-auto mt-3">
+      <table class="table table-bordered table-striped table-light table-hover">
+        <% @announcements.each do |announcement| %>
+          <tr>
+           <td>
+             公開日：<%= announcement.created_at.strftime('%Y/%m/%d') %>
+             <%= image_tag announcement.announcement_image, size: "180x180" %>
+           </td>
+           <td>
+             <div class="d-flex flex-column">
+              <div>
+                <strong><%= announcement.title %></strong>
+              </div>
+              <div>
+                <%= h(announcement.content).gsub(/\n|\r|\r\n/, "<br>").html_safe %>
+              </div>
+             </div>
+           </td>
+          </tr>
+        <% end %>
+      </table>
+       <%= paginate @announcements %>
+    </div>
+  </div> 
+  
+</div>

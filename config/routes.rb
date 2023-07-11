@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   patch '/users/:id/withdrawal' => 'publics/users#withdrawal', as: 'withdrawal'
 
   root to: 'publics/homes#top'
+  get '/announcements' => 'publics/homes#announcements'
   scope module: :publics do
     resources :users, only:[:index, :show, :edit, :update] do
       resources :posts, only:[:index]
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
     end
     
     resources :posts, only:[:new, :create, :index, :show, :edit, :update, :destroy]do
-       resources :comments, only: [:create]
+       resources :comments, only: [:create, :destroy]
        resource :favorites, only: [:create, :destroy]
     end
     
@@ -48,7 +49,7 @@ Rails.application.routes.draw do
     patch "withdrawal/:id" => "users#withdrawal", as: "withdrawal"
     
     resources :users, only:[:index, :show]
-    resources :announcements, only:[:index, :new, :create, :show, :edit, :update]
+    resources :announcements, only:[:index, :new, :create, :show, :edit, :update, :destroy]
     resources :posts, only:[:index, :show, :destroy]do
       resources :comments, only: [:destroy]
     end
