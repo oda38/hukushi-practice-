@@ -1,3 +1,16 @@
-<p>いいねした投稿一覧</p>
+<div class="container">
+  
+  <div class="row mt-5">
+    <div class="col-lg-4 offset-1">
+    <h5>いいねした投稿一覧</h5>
+    </div>
+  </div>
 
-<%= render 'publics/posts/index', posts: @posts %>
+  <div class="row mt-2">
+    <div class="col-lg-9 mx-auto">
+      <%= render 'public/posts/index', posts: @posts %>
+    </div>
+  </div>
+  
+</div>
+     

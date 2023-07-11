@@ -14,16 +14,18 @@
            <%= image_tag 'no_image_irasutoya', size: "200x200" %>
           <% end %>
           
-        <div class='mt-5'>
-          <% if user_signed_in? %>
-            <%= link_to "会員情報を編集する", edit_user_path(@user), class: "btn btn-sm btn-block btn-success" %></br>
-            <%= link_to "いいねした投稿をみる", favorites_user_path(@user), class: "btn btn-sm btn-block btn-success" %></br>
-            <%= link_to "下書き一覧", confirm_user_path(@user), class: "btn btn-sm btn-block btn-success" %>
+        <div class='mt-5 mb-5'>
+          <% if @user == current_user %>
+            <% if @user.name != "ゲスト" %>
+              <%= link_to "会員情報を編集する", edit_user_path(@user), class: "btn btn-sm btn-block btn-info text-light" %></br>
+            <% end %>
+              <%= link_to "いいねした投稿をみる", favorites_user_path(@user), class: "btn btn-sm btn-block btn-success" %></br>
+              <%= link_to "下書き一覧", confirm_user_path(@user), class: "btn btn-sm btn-block btn-warning text-light" %>
           <% end %>
         </div> 
     </div> 
     
-    <div class="col-md-6">
+    <div class="col-md-7 offset-1">
       <h5 class ="mb-5">投稿一覧</h5>
         <%= render 'publics/posts/index', posts: @posts %>
         <%= paginate @posts %>
