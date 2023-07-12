@@ -1,0 +1,15 @@
+   
+     <% if post.favorited_by?(current_user) %>
+    <p>
+      <%= button_to post_favorites_path(post), data: { "turbo-method": :delete }, local: false do %>
+        ♥<%= post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= button_to post_favorites_path(post), data: { "turbo-method": :post }, local: false do %>
+        ♡<%= post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+    
