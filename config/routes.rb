@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
 #ゲストログイン 
-  devise_scope :users do
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  devise_scope :user do
+    get 'user/guest_sign_in', to: 'publics/sessions#guest_sign_in'
   end
  
  

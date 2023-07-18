@@ -27,13 +27,11 @@
       <%= image_tag @post.image, size: "300x300" %>
       
   <% if @post.is_draft == false %>
-       <div id="favorite-btn-<%= @post.id %>">
+     
         <%= render 'form_favorite', post: @post %>
-       </div>
-    </div>
+     
     
-  
-    <div class="col-lg-4" >     
+     
       <h4>【<%= @post.title %>】</h4>
       <p><%= @post.content %></p>
         <%= @post.tags.map(&:name).join(',') %>

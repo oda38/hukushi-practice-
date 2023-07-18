@@ -1,11 +1,14 @@
 class Publics::UsersController < ApplicationController
+  before_action :authenticate_user!
+  
+  
   def index
-    @users = User.all
+    @users = User.where(is_deleted: false)
   end
   
   def show
     @user = User.find(params[:id])
-    @posts = current_user.posts.where(is_draft: :false).page(params[:page])
+    @posts = @user.posts.where(is_draft: :false).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def edit

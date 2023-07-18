@@ -4,5 +4,6 @@
 //= require popper
 //= require bootstrap-sprockets
 
+import "jquery"
 import "@hotwired/turbo-rails"
 import "controllers"
