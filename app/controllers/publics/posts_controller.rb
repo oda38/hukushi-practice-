@@ -100,8 +100,12 @@ class Publics::PostsController < ApplicationController
   
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy 
-    redirect_to posts_path
+    if @post.destroy
+      flash[:notice] = "削除しました。"
+      redirect_to posts_path, status: :see_other
+    else
+      render 'edit'
+    end
   end
   
   
